@@ -15,7 +15,7 @@ Welcome to awesome-ctl! Inspired by the Awesome-CloudOps-Automation project, thi
 
 
 # Overview
-awesome-ctl is designed to provide a collection of scripts, tools, and best practices for automating cloud operations. Whether you're managing infrastructure, deploying applications, or monitoring services, this toolkit aims to make your CloudOps tasks more efficient and reliable.
+`awesome-ctl` is designed to provide a collection of scripts, tools, and best practices for automating cloud operations. Whether you're managing infrastructure, deploying applications, or monitoring services, this toolkit aims to make your CloudOps tasks more efficient and reliable.
 
 # Features
 - Infrastructure Automation: Scripts and tools to automate the provisioning and management of cloud infrastructure.
