@@ -35,13 +35,29 @@ jobs:
       run: |
         poetry config virtualenvs.create false
 
+    - name: Check for tag and create if needed
+      id: check_tag
+      run: |
+        TAG_NAME=$(git describe --tags --abbrev=0)
+        if [ -z "$TAG_NAME" ]; then
+          NEW_TAG="v$(date +'%Y%m%d%H%M%S')"
+          git tag $NEW_TAG
+          git push origin $NEW_TAG
+          echo "::set-output name=tag::$NEW_TAG"
+        else
+          echo "Tag already exists: $TAG_NAME"
+          echo "::set-output name=tag::$TAG_NAME"
+        fi
+
     - name: Semantic Release
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        TAG_NAME: ${{ steps.check_tag.outputs.tag }}
       run: |
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
         python -m semantic_release publish
+
 
     - name: Build package
       run: poetry build
@@ -55,4 +71,4 @@ jobs:
       env:
         POETRY_PYPI_TOKEN_PYPI: ${{ secrets.PYPI_API_KEY }}
       run: |
-        poetry publish --skip-existing
+        poetry publish
