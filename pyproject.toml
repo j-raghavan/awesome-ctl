@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "awesome-ctl"
-version = "0.1.0"
+version = "0.2.0"
 description = "A comprehensive toolkit for CloudOps automation"  # Keep it concise!
 authors = ["J-Raghavan <mr.jayasimha@gmail.com>"]
 packages = [{ include = "awesome_ctl", from = "." }]
