@@ -1,5 +1,5 @@
 <h1 style="text-align: center;">
-<img src="assets/awesome-ctl.png" alt="Awesome Ctl" width="50" height="50" style="vertical-align: middle;">  Awesome-ctl </>
+<img src="https://github.com/j-raghavan/awesome-ctl/blob/master/assets/awesome-ctl.png" alt="Awesome Ctl" width="50" height="50" style="vertical-align: middle;">  Awesome-ctl </>
 </h1>
 
 
