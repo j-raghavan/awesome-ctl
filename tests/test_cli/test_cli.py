@@ -2,7 +2,6 @@ from unittest.mock import patch
 
 from typer.testing import CliRunner
 
-from awesome_ctl import __build_number__, __version__
 from awesome_ctl_cli.cli import app
 
 runner = CliRunner()
