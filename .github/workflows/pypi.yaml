@@ -32,6 +32,20 @@ jobs:
       run: |
         poetry config virtualenvs.create false
 
+    - name: Check for tag and create if not exists
+      id: check_tag
+      run: |
+        TAG_NAME=$(git describe --tags --abbrev=0 2>/dev/null)
+        if [ -z "$TAG_NAME" ]; then
+          NEW_TAG="v$(date +'%Y%m%d%H%M%S')"
+          git tag $NEW_TAG
+          git push origin $NEW_TAG
+          echo "::set-output name=tag::$NEW_TAG"
+        else
+          echo "Tag already exists: $TAG_NAME"
+          echo "::set-output name=tag::$TAG_NAME"
+        fi
+
     - name: Semantic Release
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
