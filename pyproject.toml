@@ -26,6 +26,7 @@ openai = {version = "^1.0.0", optional = true}
 
 # ... other dependencies
 pyfiglet = "^1.0.2"
+python-dateutil = "^2.9.0.post0"
 
 [tool.poetry.extras]  # Manage optional dependencies (connectors, LLMs)
 kubernetes = ["kubernetes"]
