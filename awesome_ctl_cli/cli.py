@@ -1,4 +1,3 @@
-import os
 import sys
 from threading import Thread
 from typing import Optional
@@ -60,7 +59,7 @@ def callback():
 
     typer.echo("")
 
-    typer.echo(f"  You can access awesome-ctl at http://127.0.0.1:4200")
+    typer.echo("  You can access awesome-ctl at http://127.0.0.1:4200")
     typer.echo("")
 
     def run_server():
