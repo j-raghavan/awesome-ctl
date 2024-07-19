@@ -1,28 +1,38 @@
 [tool.poetry]
 name = "awesome-ctl"
 version = "0.1.0"
-description = "A comprehensive toolkit for CloudOps automation"
+description = "A comprehensive toolkit for CloudOps automation"  # Keep it concise!
 authors = ["J-Raghavan <mr.jayasimha@gmail.com>"]
-packages = [
-    { include = "awesome_ctl", from = "." }
-]
+packages = [{ include = "awesome_ctl", from = "." }]
 readme = "README.md"
 license = "MIT"
 repository = "http://github.com/j-raghavan/awesome-ctl"
 
 [tool.poetry.scripts]
-awesome-ctl = "awesome_ctl.cli:main"
+awesome-ctl = "awesome_ctl_cli.cli:main"  # Note: "awesome_ctl_cli"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-toml = "^0.10.2"
+typer = "^0.9.0"  # Add Typer for your CLI
+uvicorn = {version = "^0.23.2", extras = ["standard"]}  # For your FastAPI server
+fastapi = "^0.98.0"
+python-multipart = "^0.0.6"
 
-# Add your project dependencies here
-# Example:
-# requests = "^2.26.0"
+# Example connector dependency (install as needed):
+kubernetes = {version = "^26.1.0", optional = true}
+
+# Example LLM dependency (choose your provider and add)
+openai = {version = "^1.0.0", optional = true}
+
+# ... other dependencies
+pyfiglet = "^1.0.2"
+
+[tool.poetry.extras]  # Manage optional dependencies (connectors, LLMs)
+kubernetes = ["kubernetes"]
+openai = ["openai"]
+# ... other optional groups
 
 [tool.poetry.dev-dependencies]
-# Add development dependencies here, e.g., for testing
 testcontainers = "^3.0.0"
 pytest = "^7.4.3"
 
@@ -30,6 +40,7 @@ pytest = "^7.4.3"
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
+# --- Style and Formatting (Optional, but recommended) ---
 [tool.black]
 line-length = 88
 target-version = ['py310']
@@ -39,12 +50,10 @@ profile = "black"
 line_length = 88
 known_first_party = "awesome_ctl"
 
-[tool.flit.metadata]
-module = "awesome_ctl"
-author = "J-Raghavan"
-author-email = "mr.jayasimha@gmail.com"
-
+# --- Testing ---
 [tool.pytest.ini_options]
-pythonpath = [
-    "."
-]
+pythonpath = ["."]
+# Consider adding markers for different test types (unit, integration):
+# markers =
+#     unit: mark tests as unit tests
+#     integration: mark tests as integration tests
