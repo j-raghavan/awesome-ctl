@@ -65,7 +65,7 @@ def callback():
     typer.echo("")
 
     def run_server():
-        uvicorn.run("awesome_ctl.api.main:app", host="127.0.0.1", port=4200)
+        uvicorn.run("awesome_ctl.ui.ui:app", host="127.0.0.1", port=4200)
 
     server_thread = Thread(target=run_server)
     server_thread.daemon = True

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--========== BOX ICONS ==========-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+
+    <!--========== CSS ==========-->
+    <link rel="stylesheet" href="/static/css/styles.css">
+
+    <title>Awesome Ctl</title>
+</head>
+
+<body>
+    <!--========== HEADER ==========-->
+    {% block header %}
+    {% include "shared/_header.html" %}
+    {% endblock %}
+
+    <!--========== NAV ==========-->
+    {% block navigation %}
+    {% include "shared/_navigation.html" %}
+    {% endblock %}
+
+    <!--========== CONTENTS ==========-->
+    {% block main %}
+    {% include "shared/_main.html" %}
+    {% endblock %}
+
+    <!--========== MAIN JS ==========-->
+    <script src="/static/js/main.js"></script>
+    <img src="/static/img/logo.png" alt="Floating Background" class="floating-bg" />
+</body>
+
+</html>
