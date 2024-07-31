@@ -1,6 +1,6 @@
 import sys
+import time
 from threading import Thread
-from typing import Optional
 
 import typer
 import uvicorn
@@ -17,18 +17,18 @@ def diagnose(
     connector: str = typer.Argument(
         ..., help="The connector to use for diagnostics (e.g., 'kubernetes')"
     ),
-    namespace: Optional[str] = typer.Option(
-        None,
-        "--namespace",
-        "-n",
-        help="The Kubernetes namespace to analyze (only for Kubernetes connector)",
+    verbose: bool = typer.Option(
+        False, "--verbose", "-v", help="Enable verbose output"
     ),
 ):
     """
     Diagnose issues using the specified connector.
     """
+    if verbose:
+        typer.echo("Running in verbose mode")
+
     if connector == "kubernetes":
-        typer.echo(f"Running diagnostics for Kubernetes namespace: {namespace}")
+        typer.echo("Running diagnostics for Kubernetes")
         # ... (Your Kubernetes diagnostics logic will go here)
     # elif connector == "docker":
     #     # ... (Docker diagnostics logic)
@@ -54,12 +54,14 @@ def callback():
     typer.echo("")
     typer.secho(banner, fg=typer.colors.BRIGHT_WHITE, bold=True)
     typer.echo("")
-    typer.secho(f"  Version:  {__version__}", fg=typer.colors.BRIGHT_BLUE, bold=True)
-    typer.secho(f"  Build: {__build_number__}", fg=typer.colors.BRIGHT_BLUE, bold=True)
+    typer.secho(f"  Version: \t {__version__}", fg=typer.colors.BRIGHT_BLUE, bold=True)
+    typer.secho(
+        f"  Build: \t {__build_number__}", fg=typer.colors.BRIGHT_BLUE, bold=True
+    )
 
     typer.echo("")
 
-    typer.echo("  You can access awesome-ctl at http://127.0.0.1:4200")
+    typer.echo("  You can access awesome-ctl UI at http://127.0.0.1:4200")
     typer.echo("")
 
     def run_server():
@@ -69,6 +71,13 @@ def callback():
     server_thread.daemon = True
     server_thread.start()
 
+
+    try:
+        while True:
+            time.sleep(1)
+    except KeyboardInterrupt:
+        print("Server shutting down...")
+        server_thread.join()  # Allow the server thread to finish
 
 def main(args=None):
     app(args)
