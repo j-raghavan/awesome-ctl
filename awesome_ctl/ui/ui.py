@@ -1,7 +1,7 @@
 import os
 
 import sass
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Header, Request
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from loguru import logger
@@ -48,4 +48,4 @@ async def home(request: Request):
 
 @app.get("/dashboard", response_class=HTMLResponse)
 async def dashboard(request: Request):
-    return templatest.TemplateResponse("dashboard.html", {"request": request})
+    return templatest.TemplateResponse("shared/_stub_dashboard.html", {"request": request})
