@@ -71,13 +71,13 @@ def callback():
     server_thread.daemon = True
     server_thread.start()
 
-
     try:
         while True:
             time.sleep(1)
     except KeyboardInterrupt:
         print("Server shutting down...")
         server_thread.join()  # Allow the server thread to finish
+
 
 def main(args=None):
     app(args)
