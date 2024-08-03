@@ -9,7 +9,7 @@ license = "MIT"
 repository = "http://github.com/j-raghavan/awesome-ctl"
 
 [tool.poetry.scripts]
-awesome-ctl = "awesome_ctl_cli.cli:main"  # Note: "awesome_ctl_cli"
+awesome = "awesome:main"  # Note: "awesome_ctl_cli"
 
 [tool.poetry.dependencies]
 python = "^3.10"
@@ -28,6 +28,7 @@ openai = {version = "^1.0.0", optional = true}
 pyfiglet = "^1.0.2"
 python-dateutil = "^2.9.0.post0"
 libsass = "^0.23.0"
+rich = "^13.7.1"
 
 [tool.poetry.extras]  # Manage optional dependencies (connectors, LLMs)
 kubernetes = ["kubernetes"]

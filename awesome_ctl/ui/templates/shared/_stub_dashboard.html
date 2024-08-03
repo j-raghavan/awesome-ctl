@@ -20,9 +20,11 @@
     function initializeCharts() {
         // Destroy existing charts if they exist
         if (window.lineChartInstance) {
+            console.log("Destroying line chart instance");
             window.lineChartInstance.destroy();
         }
         if (window.barChartInstance) {
+            console.log("Destroying bar chart instance");
             window.barChartInstance.destroy();
         }
 
