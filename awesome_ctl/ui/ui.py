@@ -17,7 +17,7 @@ templatest = Jinja2Templates(directory=template_dir)
 
 @app.on_event("startup")
 async def lifecycle():
-    logger.info("Starting up")
+    logger.info("Starting UI up")
     file_name = os.path.join(os.path.dirname(__file__), "scss", "style.scss")
     logger.info(f"Compiling {file_name}")
     if not os.path.exists(os.path.join(os.path.dirname(__file__), "scss")):

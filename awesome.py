@@ -15,9 +15,11 @@ app = typer.Typer()
 console = Console()
 
 
-def run_server():
+def start_ui():
     uvicorn.run("awesome_ctl.ui.ui:app", host="127.0.0.1", port=4200)
 
+def start_api():
+    uvicorn.run("awesome_ctl.api.main:app", host="127.0.0.1", port=8000)
 
 @app.command()
 def diagnose(
@@ -35,9 +37,13 @@ def diagnose(
     if verbose:
         typer.echo("Running in verbose mode")
 
-    server_thread = Thread(target=run_server)
-    server_thread.daemon = True
-    server_thread.start()
+    ui_server_thread = Thread(target=start_ui)
+    ui_server_thread.daemon = True
+    ui_server_thread.start()
+
+    api_server_thread = Thread(target=start_api)
+    api_server_thread.daemon = True
+    api_server_thread.start()
 
     if connector == "kubernetes":
         typer.echo("Running diagnostics for Kubernetes")
@@ -47,7 +53,9 @@ def diagnose(
     # elif connector == "aws":
     #     # ... (AWS diagnostics logic)
     else:
-        typer.echo(f"Connector '{connector}' is not yet supported.")
+        typer.echo(f"\nConnector '{connector}' is not yet supported.")
+        typer.echo("\nPlease choose one of the available connectors:")
+        list_command()
         sys.exit(1)
 
     typer.echo("")
@@ -59,7 +67,8 @@ def diagnose(
             time.sleep(1)
     except KeyboardInterrupt:
         print("Server shutting down...")
-        server_thread.join()  # Allow the server thread to finish
+        ui_server_thread.join()  # Allow the UI server thread to finish
+        api_server_thread.join()  # Allow the API server thread to finish
 
 
 @app.command(name="list")
