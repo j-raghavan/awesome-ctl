@@ -18,8 +18,10 @@ console = Console()
 def start_ui():
     uvicorn.run("awesome_ctl.ui.ui:app", host="127.0.0.1", port=4200)
 
+
 def start_api():
     uvicorn.run("awesome_ctl.api.main:app", host="127.0.0.1", port=8000)
+
 
 @app.command()
 def diagnose(

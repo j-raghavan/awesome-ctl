@@ -6,6 +6,7 @@ app = FastAPI()
 
 app.include_router(kubernetes.k8s_router, prefix="/kubernetes", tags=["kubernetes"])
 
+
 @app.on_event("startup")
 async def startup_event():
     logger.info("Starting API up")
@@ -15,6 +16,8 @@ async def startup_event():
 async def shutdown_event():
     logger.info("Shutting down API")
 
+
 if __name__ == "__main__":
     import uvicorn
+
     uvicorn.run(app, host="127.0.0.1", port=8000)
